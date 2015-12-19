@@ -1,0 +1,12 @@
+<div class="container-fluid" ng-controller="IndexController">
+{{greetings}}
+<h1>Articles list</h1>
+<ul>
+
+	<li ng-repeat="article in articles">
+		<h2>{{article.name}}</h2>
+		<p>{{article.text}}</p>
+	</li>
+
+</ul>
+</div>

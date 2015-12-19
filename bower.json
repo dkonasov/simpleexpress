@@ -1,0 +1,22 @@
+{
+  "name": "simpleexpress",
+  "description": "Simple express app",
+  "main": "index.js",
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "font-awesome": "fontawesome#~4.5.0",
+    "angular-resource": "~1.4.8"
+  }
+}

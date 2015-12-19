@@ -1,0 +1,1 @@
+var simpleexpressControllers=angular.module("simpleexpressControllers",[]);simpleexpressControllers.controller("IndexController",["$scope","$http","Articles",function(e,l,o){e.$on("articlesLoaded",function(){e.articles=o.getAll()}),e.add=function(){console.log(e.article),l.post("/backend/articles/",e.article).success(function(l){console.log(l),e.articles=o.getAll()})}}]);

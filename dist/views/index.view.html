@@ -1,0 +1,43 @@
+<div class="container-fluid" ng-controller="IndexController">
+<h1>Articles list</h1>
+<div class="toolbar row">
+	<div class="col-xs-12 col-md-12 col-sm-12">
+		<button class="btn btn-success" data-toggle="modal" data-target="#addArticle"><i class="fa fa-plus"></i>Add new article</button>
+	</div>
+</div>
+<table class="table table-condensed">
+	
+	<tr ng-repeat="article in articles">
+		<td>{{article.title}}</td>
+		<td></td>
+		<td></td>
+	</tr>
+
+</table>
+<div class="modal fade" id="addArticle" tabindex="-1" role="dialog" aria-labelledby="addArticleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addArticleModal">Add article</h4>
+      </div>
+      <div class="modal-body">
+        <form novalidate>
+			<div class="form-group">
+				<label for="addArticleTitle">Title</label>
+				<input type="text" class="form-control" id="addArticleTitle"  ng-model="article.title" />
+			</div>
+			<div class="form-group">
+				<label for="addArticleText">Text</label>
+				<textarea id="addArticleText" class="form-control" ng-model="article.text"></textarea>
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="add()">Add article</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
