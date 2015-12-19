@@ -2,23 +2,47 @@ exports.read=function(req, res){
 	
 	
 	var Article=require('./models/article.js');
-	var responseError;
+	if(!req.params.id){
 	var articles;
 	Article.find(function(err, result){
 		
-		if(err) { responseError=true;
+		if(err) { 
+		
+		res.status(500).end();
 		console.error(err);
+		
 		} else {
 			
-			articles=result;
+			res.json(result);
+			
 			
 		}
 		
-		var backendResponse=articles;
-	
-	res.json(backendResponse);
 		
-	});
+		
+	});} else {
+		
+		
+		Article.findById(req.params.id, function(err, result){
+			
+			if(err){
+				
+				console.log(err);
+				res.status(500).end();
+				
+			} else {
+				
+				
+				res.json(result);
+				
+			}
+			
+		});
+		
+	}
+	
+		
+	
 	
 	
 };

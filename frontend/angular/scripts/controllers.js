@@ -13,6 +13,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		Articles.save($scope.article, function(){
 			
 			$scope.articles=Articles.query();
+			$scope.article={};
 			
 		});
 		
@@ -20,8 +21,13 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 	$scope.view=function(id){
 		
-		console.log(id);
-		console.log("to be coded");
+		$scope.article=Articles.get({id : id}, function(){
+			
+			console.log($scope.article);
+			$('#viewArticle').modal('show')
+			
+		});
+		
 		
 		
 	}

@@ -7,7 +7,7 @@ var simpleexpress=angular.module('simpleexpress', [
 	
 	
 	
-	return $resource("/backend/articles/", {id: '@id'});
+	return $resource("/backend/articles/:id", {id: '@id'});
 	
 	
 }]);

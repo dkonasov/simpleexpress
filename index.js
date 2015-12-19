@@ -21,6 +21,22 @@ app.get("/backend/:controller/", function(req, res){
 
 }
 	
+}).get("/backend/:controller/:id", function(req, res){
+	
+	var controller;
+	
+	try{
+
+		controller=require('./backend/'+req.params.controller+'.controller.js');
+		controller.read(req, res);
+	} catch(err){
+
+	
+	console.log(err);
+	res.status(404).end();
+
+}
+	
 }).get('*', function(req, res){
 
 console.log(req.path);
