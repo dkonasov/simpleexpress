@@ -5,7 +5,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		
 		
 		$scope.articles=Articles.query();
-		
+		$scope.article={};
 	
 	$scope.clearArticle=function(){
 		
@@ -40,16 +40,28 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		
 	}
 	
-	$scope.add=function(){
+	$scope.save=function(id){
 		
+		if(!id){
 		Articles.save($scope.article, function(){
 			
 			$scope.articles=Articles.query();
 			$scope.article={};
 			
 		});
-		
+		} else {
+			
+			console.log("Modify article. To be coded.");
+			
+		}
 	}
+	
+	$scope.modifyPrompt=function(modifyingArticle){
+		
+		$scope.article=modifyingArticle;
+		$('#addArticle').modal('show');
+		
+	};
 	
 	$scope.view=function(id){
 		

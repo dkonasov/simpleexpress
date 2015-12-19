@@ -11,6 +11,8 @@
 		<td>{{article.title}}</td>
 		<td><i ng-click="view(article._id)" class="view-article fa fa-file-o" title="view"></i></td>
 		<td><i ng-click="deletePrompt(article)" class="delete-article fa fa-times" title="delete"></i></td>
+		<td><i ng-click="modifyPrompt(article)" class="modify-article fa fa-pencil-square-o" title="modify"></i></td>
+		
 	</tr>
 
 </table>
@@ -35,7 +37,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearArticle()">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="add()">Add article</button>
+        <button type="button" class="btn btn-primary" ng-click="save(article._id)">Add article</button>
       </div>
     </div>
   </div>
