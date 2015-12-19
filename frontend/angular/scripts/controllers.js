@@ -18,6 +18,14 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		
 	}
 	
+	$scope.view=function(id){
+		
+		console.log(id);
+		console.log("to be coded");
+		
+		
+	}
+	
 	
 	
 	

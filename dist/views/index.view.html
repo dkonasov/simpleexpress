@@ -9,7 +9,7 @@
 	
 	<tr ng-repeat="article in articles">
 		<td>{{article.title}}</td>
-		<td></td>
+		<td><i ng-click="view(article._id)" data-id="{{article._id}}" class="view-article fa fa-file-o" title="view"></i></td>
 		<td></td>
 	</tr>
 
