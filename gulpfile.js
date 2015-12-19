@@ -13,7 +13,7 @@ gulp.task("default", function(callback){
 });
 gulp.task("cssconcat", function(){
 	
-	return gulp.src(["./bower_components/bootstrap/dist/css/bootstrap.min.css"])
+	return gulp.src(["./bower_components/bootstrap/dist/css/bootstrap.min.css", "./frontend/css/style.css"])
 	.pipe(concat("global.css"))
 	.pipe(gulp.dest("./dist/css"));
 	

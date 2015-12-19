@@ -1,0 +1,18 @@
+.toolbar {
+	
+    height: 50px;
+	
+}
+
+.btn:focus{
+	
+	outline: none;
+	
+}
+
+.view-article:hover{
+	
+	cursor: pointer;
+	color: #00f;
+	
+}
