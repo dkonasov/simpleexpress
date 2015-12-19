@@ -4,24 +4,18 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 		
 		
+		$scope.articles=Articles.query();
 		
-		$scope.$on('articlesLoaded', function(){
-			
-			$scope.articles=Articles.getAll();
-			
-		});
 	
 	
 	$scope.add=function(){
 		
-		console.log($scope.article);
-		$http.post("/backend/articles/", $scope.article).success(function(data){
+		Articles.save($scope.article, function(){
 			
-			console.log(data);
-			$scope.articles=Articles.getAll();
-			
+			$scope.articles=Articles.query();
 			
 		});
+		
 	}
 	
 	

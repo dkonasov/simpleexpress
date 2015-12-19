@@ -14,12 +14,7 @@ exports.read=function(req, res){
 			
 		}
 		
-		var backendResponse={
-		
-		"articles" : articles,
-		"greeting" : "Hello from backend!"
-		
-	};
+		var backendResponse=articles;
 	
 	res.json(backendResponse);
 		

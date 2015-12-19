@@ -3,22 +3,11 @@ var simpleexpress=angular.module('simpleexpress', [
 'ngResource',
  'simpleexpressControllers'
  ]);
-  simpleexpress.factory('Articles', ['$http', '$rootScope', function($http, $rootScope){
+  simpleexpress.factory('Articles', ['$http', '$rootScope', '$resource', function($http, $rootScope, $resource){
 	
 	
-	var service={};
-	var articles=[];
-	$http.get("/backend/articles/").success(function(data){
-		
-		articles=data.articles;
-		$rootScope.$broadcast('articlesLoaded');
-	});
-	service.getAll=function(){
-		
-		return articles;
-		
-	};
-	return service;
+	
+	return $resource("/backend/articles/", {id: '@id'});
 	
 	
 }]);
