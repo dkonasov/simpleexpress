@@ -71,3 +71,25 @@ exports.add=function(req, res){
 	
 	
 };
+
+exports.delete=function(req, res){
+	
+	console.log(req.params.id);
+	if(req.params.id){
+		
+		var Article=require('./models/article.js');
+		Article.findByIdAndRemove(req.params.id, function(){
+			
+			res.status(200).end();
+			
+		});
+		
+	
+	} else {
+		
+		console.log("trying to delete article without id!");
+		res.status(500).end();
+		
+	}
+	
+}

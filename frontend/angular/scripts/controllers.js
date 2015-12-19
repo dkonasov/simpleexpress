@@ -7,6 +7,38 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		$scope.articles=Articles.query();
 		
 	
+	$scope.clearArticle=function(){
+		
+		$scope.article={};
+		
+	};
+	
+	$scope.delete=function(id){
+		
+		if(id){
+			
+			Articles.delete({id : id}, function(){
+				
+				$scope.articles=Articles.query(function(){
+					
+					
+					$('#deletePrompt').modal('hide');
+					
+					
+				});
+				
+			});
+			
+		}
+		
+	}
+	
+	$scope.deletePrompt=function(articleToDelete){
+		
+		$scope.article=articleToDelete;
+		$('#deletePrompt').modal('show');
+		
+	}
 	
 	$scope.add=function(){
 		
@@ -23,8 +55,8 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		
 		$scope.article=Articles.get({id : id}, function(){
 			
-			console.log($scope.article);
-			$('#viewArticle').modal('show')
+			
+			$('#viewArticle').modal('show');
 			
 		});
 		

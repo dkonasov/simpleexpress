@@ -37,7 +37,27 @@ app.get("/backend/:controller/", function(req, res){
 
 }
 	
-}).get('*', function(req, res){
+})
+.delete("/backend/:controller/:id", function(req, res){
+	
+	
+	var controller;
+	
+	try{
+
+		controller=require('./backend/'+req.params.controller+'.controller.js');
+		controller.delete(req, res);
+	} catch(err){
+
+	
+	console.log(err);
+	res.status(404).end();
+
+}
+	
+	
+})
+.get('*', function(req, res){
 
 console.log(req.path);
 res.render('template');
