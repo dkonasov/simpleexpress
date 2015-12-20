@@ -3,8 +3,8 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 	
 		
-		
-		$scope.articles=Articles.query();
+		$scope.sort={title : 1};
+		$scope.articles=Articles.query({sort: $scope.sort});
 		$scope.article={};
 	
 	$scope.clearArticle=function(){
@@ -45,7 +45,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		if(!id){
 		Articles.save($scope.article, function(){
 			
-			$scope.articles=Articles.query();
+			$scope.articles=Articles.query({sort: $scope.sort});
 			$scope.article={};
 			$('#addArticle').modal('hide');
 		});
@@ -54,7 +54,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			Articles.save({id : id, article : $scope.article}, function(){
 				
 				$scope.article={};
-				$scope.articles=Articles.query();
+				$scope.articles=Articles.query({sort: $scope.sort});
 				$('#addArticle').modal('hide');
 				
 			});
@@ -65,7 +65,12 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 	$scope.modifyPrompt=function(modifyingArticle){
 		
-		$scope.article=modifyingArticle;
+		for(var key in modifyingArticle){
+			
+			$scope.article[key]=modifyingArticle[key];
+			
+		}
+		
 		$('#addArticle').modal('show');
 		
 	};

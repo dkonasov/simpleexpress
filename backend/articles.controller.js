@@ -1,10 +1,10 @@
 exports.read=function(req, res){
 	
-	
+	//console.log(req.query.sort);
 	var Article=require('./models/article.js');
 	if(!req.params.id){
 	var articles;
-	Article.find(function(err, result){
+	Article.find().sort(JSON.parse(req.query.sort)).exec(function(err, result){
 		
 		if(err) { 
 		
