@@ -3,6 +3,15 @@ var simpleexpress=angular.module('simpleexpress', [
 'ngResource',
  'simpleexpressControllers'
  ]);
+ simpleexpress.filter('paginator', function(){
+    return function(n) {
+      var res = [];
+      for (var i = 1; i < n+1; i++) {
+        res.push(i);
+      }
+      return res;
+    };
+  });
   simpleexpress.factory('Articles', ['$http', '$rootScope', '$resource', function($http, $rootScope, $resource){
 	
 	

@@ -4,9 +4,34 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 		
 		$scope.sort={title : 1};
-		$scope.articles=Articles.query({sort: $scope.sort});
+		$scope.pageSize=10;
+		$scope.currentPage=1;
+		$scope.paginator={skip : ($scope.currentPage-1)*$scope.pageSize, limit : $scope.pageSize};
+		$scope.totalPages=1;
+		
+		
+		$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
+			
+			var totalElements=parseInt(headers('TotalElements'));
+			$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
+			
+			
+			
+		});
 		$scope.article={};
-	
+	$scope.goToPage=function(pageNum){
+		
+		$scope.currentPage=pageNum;
+		$scope.paginator={skip : ($scope.currentPage-1)*$scope.pageSize, limit : $scope.pageSize};
+		$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
+			
+			var totalElements=parseInt(headers('TotalElements'));
+			$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
+			
+			
+			
+		});
+	}
 	$scope.clearArticle=function(){
 		
 		$scope.article={};
@@ -19,9 +44,10 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			
 			Articles.delete({id : id}, function(){
 				
-				$scope.articles=Articles.query(function(){
+				$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
 					
-					
+					var totalElements=parseInt(headers('TotalElements'));
+					$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
 					$('#deletePrompt').modal('hide');
 					
 					
@@ -45,7 +71,14 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		if(!id){
 		Articles.save($scope.article, function(){
 			
-			$scope.articles=Articles.query({sort: $scope.sort});
+			$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
+				
+				
+				var totalElements=parseInt(headers('TotalElements'));
+				$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
+				
+				
+			});
 			$scope.article={};
 			$('#addArticle').modal('hide');
 		});
@@ -54,11 +87,16 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			Articles.save({id : id, article : $scope.article}, function(){
 				
 				$scope.article={};
-				$scope.articles=Articles.query({sort: $scope.sort});
+				$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
+					
+					var totalElements=parseInt(headers('TotalElements'));
+					$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
+					
+				});
 				$('#addArticle').modal('hide');
 				
 			});
-			console.log("Modify article. To be coded.");
+			
 			
 		}
 	}

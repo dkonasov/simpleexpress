@@ -1,10 +1,11 @@
 exports.read=function(req, res){
 	
-	//console.log(req.query.sort);
+	
 	var Article=require('./models/article.js');
 	if(!req.params.id){
 	var articles;
-	Article.find().sort(JSON.parse(req.query.sort)).exec(function(err, result){
+	var paginator=JSON.parse(req.query.paginator);
+	Article.find().sort(JSON.parse(req.query.sort)).skip(paginator.skip).limit(paginator.limit).exec(function(err, result){
 		
 		if(err) { 
 		
@@ -13,7 +14,23 @@ exports.read=function(req, res){
 		
 		} else {
 			
-			res.json(result);
+			//var backend
+			Article.count(function(err, count){
+				
+				if(err){
+					
+					console.log(err);
+					res.status(500).end();
+					
+				} else {
+					
+					res.set('TotalElements', count);
+					res.json(result);
+					
+				}
+				
+			});
+			
 			
 			
 		}
