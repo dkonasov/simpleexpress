@@ -57,22 +57,39 @@ app.get("/backend/:controller/", function(req, res){
 	
 	
 })
+.post("/backend/:controller/:id", function(req, res){
+	
+	var controller;
+	
+	try{
+
+		controller=require('./backend/'+req.params.controller+'.controller.js');
+		controller.update(req, res);
+	} catch(err){
+
+	
+	console.log(err);
+	res.status(404).end();
+
+}
+	
+})
 .get('*', function(req, res){
 
 console.log(req.path);
 res.render('template');
 
 });
-app.route("/backend/*").post(
+app.route("/backend/:controller/").post(
 
 	function(req, res){
 		
 		
 		var controller;
-	var pathArray=req.path.split('/');
+	
 	try{
 
-		controller=require('./backend/'+pathArray[2]+'.controller.js');
+		controller=require('./backend/'+req.params.controller+'.controller.js');
 		controller.add(req, res);
 	} catch(err){
 

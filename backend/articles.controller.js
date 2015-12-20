@@ -74,7 +74,7 @@ exports.add=function(req, res){
 
 exports.delete=function(req, res){
 	
-	console.log(req.params.id);
+	
 	if(req.params.id){
 		
 		var Article=require('./models/article.js');
@@ -88,6 +88,38 @@ exports.delete=function(req, res){
 	} else {
 		
 		console.log("trying to delete article without id!");
+		res.status(500).end();
+		
+	}
+	
+}
+
+exports.update=function(req, res){
+	
+	if(req.params.id){
+		
+		var Article=require('./models/article.js');
+		delete req.body.article._id;
+		Article.findByIdAndUpdate(req.params.id, req.body.article, function(err, result){
+			
+			
+			if(!err){
+				
+				res.status(200).end();
+				
+			} else {
+				
+				console.log(err);
+				res.status(500).end();
+				
+			}
+			
+			
+		});
+		
+	}else{
+		
+		console.log("trying to modify article without id!");
 		res.status(500).end();
 		
 	}

@@ -14,7 +14,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	};
 	
 	$scope.delete=function(id){
-		
+		$scope.article={};
 		if(id){
 			
 			Articles.delete({id : id}, function(){
@@ -47,10 +47,17 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			
 			$scope.articles=Articles.query();
 			$scope.article={};
-			
+			$('#addArticle').modal('hide');
 		});
 		} else {
 			
+			Articles.save({id : id, article : $scope.article}, function(){
+				
+				$scope.article={};
+				$scope.articles=Articles.query();
+				$('#addArticle').modal('hide');
+				
+			});
 			console.log("Modify article. To be coded.");
 			
 		}

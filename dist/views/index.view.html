@@ -20,7 +20,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" ng-click="clearArticle()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="addArticleModal">Add article</h4>
       </div>
       <div class="modal-body">
@@ -46,7 +46,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" ng-click="clearArticle()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="addArticleModal">Delete article</h4>
       </div>
       <div class="modal-body">
@@ -63,7 +63,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" ng-click="clearArticle()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="viewArticleModal">{{article.title}}</h4>
       </div>
       <div class="modal-body">
