@@ -70,7 +70,7 @@ exports.start=function(app){
 })
 .get('*', function(req, res){
 
-console.log(req.path);
+
 res.render('template');
 
 });

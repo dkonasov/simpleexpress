@@ -1,14 +1,28 @@
 <div class="container-fluid" ng-controller="IndexController">
 <h1>Articles list</h1>
 <div class="toolbar row">
-	<div class="col-xs-12 col-md-12 col-sm-12">
-		<button class="btn btn-success" data-toggle="modal" data-target="#addArticle"><i class="fa fa-plus"></i>Add new article</button>
+	<div class="col-xs-3 col-md-6 col-sm-6">
+		<button class="btn btn-success" data-toggle="modal" data-target="#addArticle"><i class="fa fa-plus"></i><span class="hidden-xs">Add new article</span></button>
+	</div>
+	<div class="col-xs-9 col-md-6 col-sm-6">
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-sm-6">
+			<span>Order by:</span>
+		</div>
+		<div class="col-xs-6 col-md-6 col-sm-6">
+			<select class="form-control" ng-model="sortingParams.field">
+				<option value="title" selected>Title</option>
+				<option value="publishDate">Publish date</option>
+			</select>
+		</div>
+	</div>
 	</div>
 </div>
 <table class="table table-striped table-bordered">
 	
 	<tr ng-repeat="article in articles">
 		<td>{{article.title}}</td>
+		<td>{{article.publishDate | date:'dd-MM-yyyy'}}</td>
 		<td><i ng-click="view(article._id)" class="view-article fa fa-file-o" title="view"></i></td>
 		<td><i ng-click="deletePrompt(article)" class="delete-article fa fa-times" title="delete"></i></td>
 		<td><i ng-click="modifyPrompt(article)" class="modify-article fa fa-pencil-square-o" title="modify"></i></td>
@@ -42,6 +56,9 @@
 			<div class="form-group">
 				<label for="addArticleText">Text</label>
 				<textarea id="addArticleText" class="form-control" ng-model="article.text"></textarea>
+				<label for="articleDate">Publish date</label>
+				<input date-time ng-model="article.publishDate" id="articleDate" class="form-control"/>
+				<!-- <input type="hidden" ng-model="article.publishDate" /> -->
 			</div>
 		</form>
       </div>

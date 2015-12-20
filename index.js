@@ -15,7 +15,8 @@ db.once('open', function(){
 	var router=require('./server_modules/router');
 	router.start(app);
 	var server=app.listen(3000, function(){
-	console.log('Simpleexpress server started');
+		
+		console.log('Simpleexpress server started');
 
 	});
 	

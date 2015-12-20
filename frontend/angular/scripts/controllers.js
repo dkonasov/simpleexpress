@@ -4,6 +4,8 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 		
 		$scope.sort={title : 1};
+		$scope.sortingParams={field : "title", direction : 1};
+		$scope.testDate="";
 		$scope.pageSize=10;
 		$scope.currentPage=1;
 		$scope.paginator={skip : ($scope.currentPage-1)*$scope.pageSize, limit : $scope.pageSize};
@@ -12,6 +14,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		
 		$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
 			
+			
 			var totalElements=parseInt(headers('TotalElements'));
 			$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
 			
@@ -19,6 +22,24 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			
 		});
 		$scope.article={};
+		$scope.$watch('sortingParams', function(newValue, oldValue){
+			
+			 if(newValue === oldValue){
+				return;
+			}
+			$scope.sort={};
+			$scope.sort[newValue.field]=newValue.direction;
+			$scope.articles=Articles.query({sort: $scope.sort, paginator: $scope.paginator}, function(data, headers){
+			
+			
+			var totalElements=parseInt(headers('TotalElements'));
+			$scope.totalPages=Math.ceil(totalElements/$scope.pageSize);
+			
+			
+			
+		});
+			
+		}, true);
 	$scope.goToPage=function(pageNum){
 		
 		$scope.currentPage=pageNum;

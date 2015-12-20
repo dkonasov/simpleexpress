@@ -1,6 +1,7 @@
 var simpleexpress=angular.module('simpleexpress', [
 'ngRoute',
 'ngResource',
+'datePicker',
  'simpleexpressControllers'
  ]);
  simpleexpress.filter('paginator', function(){
