@@ -40,6 +40,12 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 		});
 			
 		}, true);
+	$scope.changeSortDirection=function(){
+		
+		
+		$scope.sortingParams.direction=0-$scope.sortingParams.direction;
+		
+	}
 	$scope.goToPage=function(pageNum){
 		
 		$scope.currentPage=pageNum;
