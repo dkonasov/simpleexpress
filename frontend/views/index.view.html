@@ -1,0 +1,108 @@
+<div class="container-fluid" ng-controller="IndexController">
+<h1>Articles list</h1>
+<div class="toolbar row">
+	<div class="col-xs-3 col-md-6 col-sm-6">
+		<button class="btn btn-success" data-toggle="modal" data-target="#addArticle"><i class="fa fa-plus"></i><span class="hidden-xs">Add new article</span></button>
+	</div>
+	<div class="col-xs-9 col-md-6 col-sm-6">
+	<div class="row">
+		<div class="col-xs-3 col-md-3 col-sm-3">
+			<span class="order-label">Order by:</span>
+		</div>
+		<div class="col-xs-3 col-md-3 col-sm-3">
+			<select class="form-control" ng-model="sortingParams.field">
+				<option value="title" selected>Title</option>
+				<option value="publishDate">Publish date</option>
+			</select>
+		</div>
+		<div class="col-xs-3 col-md-3 col-sm-3">
+			<i ng-class="{'fa fa-arrow-down sort-icon' : sortingParams.direction==-1, 'fa fa-arrow-up sort-icon' : sortingParams.direction==1}" ng-click="changeSortDirection()"></i>
+		</div>
+	</div>
+	</div>
+</div>
+<table class="table table-striped table-bordered">
+	
+	<tr ng-repeat="article in articles">
+		<td>{{article.title}}</td>
+		<td>{{article.publishDate | date:'dd-MM-yyyy'}}</td>
+		<td><i ng-click="view(article._id)" class="view-article fa fa-file-o" title="view"></i></td>
+		<td><i ng-click="deletePrompt(article)" class="delete-article fa fa-times" title="delete"></i></td>
+		<td><i ng-click="modifyPrompt(article)" class="modify-article fa fa-pencil-square-o" title="modify"></i></td>
+		
+	</tr>
+
+</table>
+<div class="row" ng-show="totalPages>1">
+	<div class="col-xs-12 col-md-12 col-sm-12">
+	<ul class="pagination">
+		<li ng-repeat="i in totalPages | paginator" ng-class="{active : currentPage==i}">
+			<a href="javascript:void(0);" ng-hide="currentPage==i" ng-click="goToPage(i)">{{i}}</a>
+			<span ng-show="currentPage==i" class="active">{{i}}</span>
+		</li>
+	</ul>
+	</div>
+</div>
+<div class="modal fade" id="addArticle" tabindex="-1" role="dialog" aria-labelledby="addArticleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="clearArticle()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addArticleModal">Add article</h4>
+      </div>
+      <div class="modal-body">
+        <form novalidate>
+			<div class="form-group">
+				<label for="addArticleTitle">Title</label>
+				<input type="text" class="form-control" id="addArticleTitle"  ng-model="article.title" />
+			</div>
+			<div class="form-group">
+				<label for="addArticleText">Text</label>
+				<textarea id="addArticleText" class="form-control" ng-model="article.text"></textarea>
+				<label for="articleDate">Publish date</label>
+				<input date-time ng-model="article.publishDate" id="articleDate" class="form-control"/>
+				<!-- <input type="hidden" ng-model="article.publishDate" /> -->
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearArticle()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="save(article._id)">Add article</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="deletePrompt" tabindex="-1" role="dialog" aria-labelledby="deletePromptModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="clearArticle()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addArticleModal">Delete article</h4>
+      </div>
+      <div class="modal-body">
+      Are you sure want to delete this article?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearArticle()">No</button>
+        <button type="button" class="btn btn-primary" ng-click="delete(article._id)">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="viewArticle" tabindex="-1" role="dialog" aria-labelledby="viewArticleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="clearArticle()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="viewArticleModal">{{article.title}}</h4>
+      </div>
+      <div class="modal-body">
+      <div class="single-article-text">{{article.text}}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearArticle()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

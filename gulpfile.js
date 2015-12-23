@@ -8,6 +8,7 @@ gulp.task("default", function(callback){
 				"angulardest",
 				"scripts",
 				"concatjs",
+				"htmldest",
               callback);
 	
 });
@@ -23,6 +24,13 @@ gulp.task("angulardest", function(){
 	
 	return gulp.src(["./bower_components/angular/angular.min.js", "./bower_components/angular-route/angular-route.min.js", "./bower_components/angular-resource/angular-resource.min.js", "./bower_components/moment/min/moment-with-locales.min.js", "./bower_components/angular-datepicker/dist/angular-datepicker.min.js"])
 	.pipe(gulp.dest("./dist/js"));
+	
+});
+
+gulp.task("htmldest", function(){
+	
+	return gulp.src(["./frontend/views/*"])
+	.pipe(gulp.dest("./dist/views"));
 	
 });
 
