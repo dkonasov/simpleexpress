@@ -2,7 +2,7 @@ var simpleexpressControllers=angular.module('simpleexpressControllers', []);
 simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Articles", function($scope, $http, Articles){
 	
 	
-		
+		console.log("4ever");
 		$scope.sort={title : 1};
 		$scope.sortingParams={field : "title", direction : 1};
 		$scope.testDate="";
@@ -95,6 +95,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 	$scope.save=function(id){
 		
+		if(!$scope.articleForm.$invalid){
 		if(!id){
 		Articles.save($scope.article, function(){
 			
@@ -125,6 +126,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			});
 			
 			
+		}
 		}
 	}
 	
