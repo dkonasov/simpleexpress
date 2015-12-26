@@ -95,7 +95,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 	
 	$scope.save=function(id){
 		
-		if(!$scope.articleForm.$invalid){
+		
 		if(!id){
 		Articles.save($scope.article, function(){
 			
@@ -127,7 +127,7 @@ simpleexpressControllers.controller("IndexController", ["$scope", "$http", "Arti
 			
 			
 		}
-		}
+		
 	}
 	
 	$scope.modifyPrompt=function(modifyingArticle){
